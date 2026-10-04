@@ -1,0 +1,77 @@
+.education-section {
+  padding: 8rem 0;
+}
+
+.education-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  transition: border-color 0.25s;
+}
+.education-card:hover {
+  border-color: rgba(255,255,255,0.1);
+}
+
+.edu-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.edu-degree {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.edu-college {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.edu-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.edu-batch {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.edu-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  padding: 0.2rem 0.7rem;
+}
+
+@media (max-width: 600px) {
+  .education-section {
+    padding: 5rem 0;
+  }
+  .education-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+  }
+  .edu-right {
+    align-items: flex-start;
+  }
+}

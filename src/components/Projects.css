@@ -1,0 +1,180 @@
+.projects-section {
+  padding: 8rem 0;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* Card */
+.project-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-glass);
+  cursor: default;
+  transition: border-color 0.3s;
+  perspective: 1000px;
+}
+.project-card:hover {
+  border-color: var(--accent-border, rgba(255,255,255,0.1));
+}
+
+.project-card-inner {
+  position: relative;
+  z-index: 2;
+  padding: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  height: 100%;
+}
+
+/* Abstract background */
+.project-abstract {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.abstract-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.6;
+}
+
+.abstract-glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: var(--accent, rgba(200,200,208,0.04));
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+/* Header row */
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.project-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.project-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.project-type {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-glass);
+  border-radius: 20px;
+  padding: 0.25rem 0.75rem;
+}
+
+/* Title block */
+.project-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.project-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.project-tagline {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Description */
+.project-description {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  flex: 1;
+}
+
+/* Tech */
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* Links */
+.project-links {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.55rem 1.2rem;
+  border-radius: 7px;
+  transition: all 0.25s;
+  letter-spacing: 0.01em;
+}
+
+.project-link--primary {
+  background: rgba(255,255,255,0.07);
+  color: var(--text-primary);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.project-link--primary:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-1px);
+}
+
+.project-link--outline {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-glass);
+}
+.project-link--outline:hover {
+  border-color: rgba(255,255,255,0.12);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .projects-section {
+    padding: 5rem 0;
+  }
+}
