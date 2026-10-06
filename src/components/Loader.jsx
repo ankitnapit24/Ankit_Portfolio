@@ -28,18 +28,9 @@ const Loader = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            <span className="loader-name">AN</span>
+            <span className="loader-name">LOADING</span>
             <span className="loader-dot" />
           </motion.div>
-
-          <motion.p
-            className="loader-sub"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.4 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-          >
-            Loading Portfolio
-          </motion.p>
         </div>
 
         <motion.div

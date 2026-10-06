@@ -69,7 +69,7 @@ const Hero = () => {
             <a href="#projects" className="btn-primary" onClick={e => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) }}>
               <FiEye /> View My Work
             </a>
-            <a href="/resume.pdf" className="btn-outline" download>
+            <a href="/resume.pdf" className="btn-outline" download="Ankit_Napit_Resume.pdf">
               <FiDownload /> Download Resume
             </a>
           </motion.div>

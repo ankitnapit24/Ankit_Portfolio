@@ -1,2 +1,0 @@
-This is a placeholder. Replace this file with your actual resume PDF and rename it to "resume.pdf".
-The "Download Resume" button in the Hero section links to /resume.pdf

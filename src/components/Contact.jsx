@@ -22,35 +22,65 @@ const Contact = () => {
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [form, setForm] = useState({ name: '', email: '', message: '' })
 
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
   const handleChange = (e) => {
+    if (status === 'error') setStatus('idle')
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // Fallback: If in error state and user clicks "Failed — Try Email Directly", open email client
+    if (status === 'error') {
+      const subject = encodeURIComponent(`Portfolio Inquiry from ${form.name || 'Visitor'}`)
+      const body = encodeURIComponent(
+        `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+      )
+      window.location.href = `mailto:ankitnapit8@gmail.com?subject=${subject}&body=${body}`
+      return
+    }
+
     if (!form.name || !form.email || !form.message) return
+    if (status === 'sending') return
 
     setStatus('sending')
+
+    if (!serviceId || !templateId || !publicKey) {
+      console.warn(
+        'EmailJS credentials missing. Please set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY in your .env or Vercel environment variables.'
+      )
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 6000)
+      return
+    }
+
     try {
-      // Using EmailJS — user should replace with their own service/template/public key
       await emailjs.send(
-        'YOUR_SERVICE_ID',      // replace
-        'YOUR_TEMPLATE_ID',     // replace
+        serviceId,
+        templateId,
         {
-          from_name: form.name,
-          from_email: form.email,
-          message: form.message,
-          to_name: 'Ankit',
+          name: form.name.trim(),
+          from_name: form.name.trim(),
+          email: form.email.trim(),
+          from_email: form.email.trim(),
+          reply_to: form.email.trim(),
+          message: form.message.trim(),
+          to_name: 'Ankit Napit',
         },
-        'YOUR_PUBLIC_KEY'       // replace
+        publicKey
       )
       setStatus('success')
       setForm({ name: '', email: '', message: '' })
-    } catch {
+    } catch (err) {
+      console.error('EmailJS sending error:', err?.text || err?.message || err)
       setStatus('error')
     }
 
-    setTimeout(() => setStatus('idle'), 5000)
+    setTimeout(() => setStatus('idle'), 6000)
   }
 
   return (
@@ -58,7 +88,7 @@ const Contact = () => {
       <div className="section-container">
         <FadeIn>
           <div className="section-header">
-            <span className="section-label">07 / Contact</span>
+            <span className="section-label">06 / Contact</span>
             <h2 className="section-title">Let's Build <span>Together</span></h2>
             <p className="section-subtitle">
               Have a project in mind or just want to connect? I'm always open to interesting
@@ -166,9 +196,11 @@ const Contact = () => {
                 {status === 'error' && <><FiAlertCircle /> Failed — Try Email Directly</>}
               </motion.button>
 
-              <p className="form-note">
-                * Configure EmailJS credentials in <code>Contact.jsx</code> to enable form sending.
-              </p>
+              {(!serviceId || !templateId || !publicKey) && (
+                <p className="form-note">
+                  * Configure EmailJS credentials in <code>.env</code> to enable form sending.
+                </p>
+              )}
             </form>
           </FadeIn>
         </div>
